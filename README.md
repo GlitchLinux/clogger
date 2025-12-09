@@ -291,32 +291,6 @@ clogger "command"
 Instead of:
 ls -la /var/www
 
-
-Run:
-clogger "ls -la /var/www"
-
-
-Instead of:
-systemctl restart apache2
-
-
-Run:
-clogger "systemctl restart apache2"
-
-
-═══════════════════════════════════
-## AUTOMATIC MCP LOGGING - CLOGGER
-═══════════════════════════════════
-
-**ALWAYS wrap MCP ssh-server commands with clogger:**
-
-clogger "command"
-
-### Examples:
-
-Instead of:
-ls -la /var/www
-
 Run:
 clogger "ls -la /var/www"
 
@@ -335,6 +309,8 @@ Run:
 clogger "cat > /tmp/script.sh <<'EOF'
 ...content...
 EOF"
+
+Simply just run 'clogger' before every MCP ssh command
 
 ```
 
