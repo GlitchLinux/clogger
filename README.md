@@ -285,7 +285,6 @@ clogger is a MCP auto-logging tool used to log MCP SSH-actions on server
 ```bash
 clogger "command"
 
-
 ### Examples:
 
 Instead of:
