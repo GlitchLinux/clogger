@@ -1,9 +1,10 @@
-# clogger "claude logger"
-## Dead-Simple MCP Audit Logging
+# clogger - Dead-Simple MCP Audit Logging
 
 ![clogger Live View](screenshots/clogger.log-live.png)
 
 **Transparent, real-time audit logging for MCP (Model Context Protocol) operations with instant web accessibility.**
+
+clogger = 'claude logger'
 
 Built in 56 lines of bash. Zero dependencies beyond standard Linux tools.
 
