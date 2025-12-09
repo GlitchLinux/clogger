@@ -283,7 +283,7 @@ If you're using Claude with MCP ssh-server access, add this to your Claude prefe
 ALWAYS wrap MCP ssh-server commands with clogger
 
 **CRITICAL:**
-clogger is a transparent MCP auto-logging tool used to log all claude MCP SSH-actions on server
+clogger is a MCP auto-logging tool used to log MCP SSH-actions on server
 
 ```bash
 clogger "command"
