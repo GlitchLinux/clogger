@@ -1,4 +1,5 @@
-# clogger - Dead-Simple MCP Audit Logging
+# clogger "claude logger"
+## Dead-Simple MCP Audit Logging
 
 ![clogger Live View](screenshots/clogger.log-live.png)
 
