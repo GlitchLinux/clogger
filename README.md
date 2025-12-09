@@ -6,17 +6,17 @@
 
 Built in 56 lines of bash. Zero dependencies beyond standard Linux tools.
 
-## ✨ Features
+## Features
 
-- 🔍 **Transparent Logging** - Wrap any command with `clogger "command"` - zero manual logging
-- 🧠 **Smart Summarization** - Heredocs and long commands automatically condensed
-- 🌐 **Instant Web Sync** - View logs at `https://yourdomain.com/clogger.log` with zero lag
-- ⚡ **Live Updates** - Auto-refreshing web dashboard updates every 300ms
-- 💾 **Automated Backups** - Hourly snapshots with 24-hour retention
-- 🎯 **Exit Code Preservation** - Non-intrusive, doesn't break error handling
-- 📊 **Reverse Chronology** - Newest entries at top (via `tac`)
+-  **Transparent Logging** - Wrap any command with `clogger "command"` - zero manual logging
+-  **Smart Summarization** - Heredocs and long commands automatically condensed
+-  **Instant Web Sync** - View logs at `https://yourdomain.com/clogger.log` with zero lag
+-  **Live Updates** - Auto-refreshing web dashboard updates every 300ms
+-  **Automated Backups** - Hourly snapshots with 24-hour retention
+-  **Exit Code Preservation** - Non-intrusive, doesn't break error handling
+-  **Reverse Chronology** - Newest entries at top (via `tac`)
 
-## 📸 Screenshots
+## Screenshots
 
 ### Raw Log View
 ![clogger Raw Log](screenshots/clogger.log.png)
