@@ -31,7 +31,7 @@ Built in 56 lines of bash. Zero dependencies beyond standard Linux tools.
 ```bash
 git clone https://github.com/GlitchLinux/clogger.git
 cd clogger
-sudo ./install-clogger.sh
+./install-clogger.sh
 ```
 
 Configure your domain and start logging!
