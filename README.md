@@ -265,14 +265,11 @@ ls -la /CLAUDE-LOG/BACKUP/
 ├── clogger.log
 └── clogger-live.html
 ```
-
 ---
 
 ## 🤖 Claude Integration (MCP)
 
 If you're using Claude with MCP ssh-server access, add this to your Claude preferences to enable automatic logging:
-
-# After clogger installtion Add the this to you claude preferences
 
 ```
 ════════════════════════════════════
