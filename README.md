@@ -290,3 +290,136 @@ Fork → Branch → Test → PR
 **Made with ❤️ by [GlitchLinux](https://github.com/GlitchLinux)**
 
 *"Because knowing what your AI did shouldn't require an enterprise logging solution."*
+
+---
+
+## 🤖 Claude Integration (MCP)
+
+If you're using Claude with MCP ssh-server access, add this to your Claude preferences to enable automatic logging:
+
+### Setup in Claude Preferences
+
+Add to your **User Preferences** in Claude:
+
+```
+═════════════════════════════════════════════════════
+ ## AUTOMATIC MCP LOGGING - CLOGGER
+═════════════════════════════════════════════════════
+
+**CRITICAL:** When working on servers with MCP, ALWAYS use ssh-server MCP tools.
+ALWAYS wrap MCP ssh-server commands with clogger:
+
+```bash
+clogger "command"
+```
+
+### Examples:
+
+Instead of:
+```bash
+ls -la /var/www
+```
+
+Run:
+```bash
+clogger "ls -la /var/www"
+```
+
+Instead of:
+```bash
+systemctl restart apache2
+```
+
+Run:
+```bash
+clogger "systemctl restart apache2"
+```
+
+Instead of:
+```bash
+cat > /tmp/script.sh <<'EOF'
+#!/bin/bash
+echo "test"
+
+---
+
+## 🤖 Claude Integration (MCP)
+
+If you're using Claude with MCP ssh-server access, add this to your Claude preferences to enable automatic logging:
+
+### Setup in Claude Preferences
+
+Add to your **User Preferences** in Claude:
+
+```
+═════════════════════════════════════════════════════
+ ## AUTOMATIC MCP LOGGING - CLOGGER
+═════════════════════════════════════════════════════
+
+**ALWAYS wrap MCP ssh-server commands with clogger:**
+
+clogger "command"
+
+### Examples:
+
+Instead of:
+ls -la /var/www
+
+Run:
+clogger "ls -la /var/www"
+
+Instead of:
+systemctl restart apache2
+
+Run:
+clogger "systemctl restart apache2"
+
+Instead of:
+cat > /tmp/script.sh <<'EOF'
+...content...
+EOF
+
+Run:
+clogger "cat > /tmp/script.sh <<'EOF'
+...content...
+EOF"
+
+### What Clogger Does:
+
+✅ Automatically logs every command to:
+- Backend: /CLAUDE-LOG/clogger.log
+- Web: https://yourdomain.com/clogger.log
+- Live: https://yourdomain.com/clogger-live.html
+
+✅ Smart summarization:
+- Simple commands: Logged in full
+- File creation (heredocs): "Created file: script.py (200 lines)"
+- sed edits: "Modified with sed: config.conf"
+- Long commands (>200 chars): Truncated with total length shown
+
+✅ Fully transparent:
+- Non-blocking execution
+- Exit code preservation
+- Real-time web sync (<1 second)
+- No manual logging required
+
+### Monitoring:
+View all MCP operations live at:
+https://yourdomain.com/clogger-live.html
+(Green matrix aesthetic, updates every 300ms)
+
+### When NOT to use clogger:
+- Interactive commands: nano, vim, top, htop (run directly)
+- Commands already containing "clogger" (avoid recursion)
+
+══════════════════════════════════════════════
+```
+
+### Why This Matters
+
+When Claude has MCP access to your servers, every command should be logged for:
+- **Security auditing** - Know exactly what happened
+- **Debugging** - Trace issues back to specific operations
+- **Compliance** - Required for regulated environments
+- **Learning** - Review Claude's approaches
+
