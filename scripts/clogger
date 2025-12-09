@@ -1,0 +1,56 @@
+#!/bin/bash
+# /usr/local/bin/clogger
+# Transparent MCP command logger with smart summarization + instant web sync
+# Version: 1.3 (synchronous web sync, renamed MCP-AUTO → MCP)
+
+REAL_CMD="$*"
+LOG_CMD=""
+
+# Smart truncation: Keep commands readable
+if [[ ${#REAL_CMD} -gt 200 ]]; then
+    # For long commands, show first 150 chars + total length
+    LOG_CMD="${REAL_CMD:0:150}... [${#REAL_CMD} chars total]"
+else
+    # Short commands: log as-is
+    LOG_CMD="$REAL_CMD"
+fi
+
+# PATTERN MATCHING: Detect and summarize specific command types
+
+# Pattern 1: File creation with heredoc (cat > file <<EOF)
+if [[ "$REAL_CMD" =~ cat[[:space:]]*\>[[:space:]]*([^[:space:]]+)[[:space:]]*\<\< ]]; then
+    FILE="${BASH_REMATCH[1]}"
+    LINE_COUNT=$(echo "$REAL_CMD" | wc -l)
+    LOG_CMD="Created file: $FILE ($LINE_COUNT lines)"
+
+# Pattern 2: File append with heredoc (cat >> file <<EOF)
+elif [[ "$REAL_CMD" =~ cat[[:space:]]*\>\>[[:space:]]*([^[:space:]]+)[[:space:]]*\<\< ]]; then
+    FILE="${BASH_REMATCH[1]}"
+    LINE_COUNT=$(echo "$REAL_CMD" | wc -l)
+    LOG_CMD="Appended to file: $FILE ($LINE_COUNT lines)"
+
+# Pattern 3: sed in-place editing
+elif [[ "$REAL_CMD" =~ sed[[:space:]].*-i.*[[:space:]]+([^[:space:]]+)$ ]]; then
+    FILE="${BASH_REMATCH[1]}"
+    LOG_CMD="Modified with sed: $FILE"
+
+# Pattern 4: Multi-line commands without patterns above
+elif [[ "$REAL_CMD" =~ $'\n' ]]; then
+    FIRST_LINE=$(echo "$REAL_CMD" | head -1)
+    LINE_COUNT=$(echo "$REAL_CMD" | wc -l)
+    LOG_CMD="Multi-line command ($LINE_COUNT lines): ${FIRST_LINE:0:100}..."
+fi
+
+# Log to backend
+TIMESTAMP="[$(date '+%H:%M:%S')] [$(date '+%d-%m-%Y')]"
+echo "$TIMESTAMP [MCP] [claude] [$(pwd)] [$LOG_CMD]" >> /CLAUDE-LOG/clogger.log 2>/dev/null
+
+# SYNCHRONOUS web sync for zero lag
+/CLAUDE-LOG/sync-web.sh &>/dev/null
+
+# Execute command with bash -c (handles pipes, redirects, etc.)
+bash -c "$REAL_CMD"
+EXIT_CODE=$?
+
+# Return original exit code (critical for error handling)
+exit $EXIT_CODE
